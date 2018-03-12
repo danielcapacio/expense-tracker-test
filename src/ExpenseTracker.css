@@ -2,6 +2,21 @@
   text-align: center;
   margin: 40px 20px;
 }
+@media (max-width: 400px) {
+  .App {
+    font-size: smaller;
+  }
+}
+@media (max-width: 375px) {
+  .App {
+    font-size: x-small;
+  }
+}
+@media (max-width: 320px) {
+  .App {
+    font-size: xx-small;
+  }
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
