@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
 import { columns } from '../config/Columns';
-import { expenses } from '../config/TestExpenses';
 
 export default class Dashboard extends Component {
 
@@ -19,27 +18,48 @@ export default class Dashboard extends Component {
         };
     }
 
+    componentWillMount() {
+        if (localStorage.getItem('expenses') != null) {
+            this.setState({
+                expenses: JSON.parse(localStorage.getItem('expenses'))
+            });
+        } else {
+            console.log('no expenses in local storage');
+        }
+    }
+
     _addExpense = () => {
-        // ...
+        const { date, category, description, amount, expenses } = this.state;
+        var oldExpenses = expenses;
+        const newExpense = {
+            id: expenses.length + 1,
+            date: date,
+            category: category,
+            description: description,
+            amount: amount
+        }
+        oldExpenses.push(newExpense);
+        localStorage.setItem('expenses', JSON.stringify(oldExpenses));
+        this.setState({
+            expenses: JSON.parse(localStorage.getItem('expenses'))
+        });
     }
 
     _handleDateChange = (e) => {
         this.setState({date: e.target.value});
     }
-
     _handleCategoryChange = (e) => {
         this.setState({category: e.target.value});
     }
-
     _handleDescriptionChange = (e) => {
         this.setState({description: e.target.value});
     }
-
     _handleAmountChange = (e) => {
         this.setState({amount: e.target.value});
     }
 
     render() {
+        const { expenses } = this.state;
         return (
             <div>
                 <div style={{paddingTop:40,paddingBottom:40}}>
