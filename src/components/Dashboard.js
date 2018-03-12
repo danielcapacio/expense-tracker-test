@@ -57,13 +57,13 @@ export default class Dashboard extends Component {
         this.setState({date: e.target.value});
     }
     _handleCategoryChange = (e) => {
-        this.setState({category: e.target.value});
+        this.setState({category: parseInt(e.target.value, 10)});
     }
     _handleDescriptionChange = (e) => {
         this.setState({description: e.target.value});
     }
     _handleAmountChange = (e) => {
-        this.setState({amount: e.target.value});
+        this.setState({amount: parseFloat(e.target.value, 10)});
     }
 
     _getTotalAmount = () => {
