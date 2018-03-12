@@ -1,5 +1,4 @@
 ## Expense Tracker Application
-___
 #### About
 The main purpose of this single page application serves as a quick and efficient way of tracking expenses. This was built with React using localStorage to store and retrieve user-added expenses.
 #### How to use
