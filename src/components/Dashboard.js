@@ -13,9 +13,9 @@ export default class Dashboard extends Component {
             date: '',
             category: '',
             description: '',
-            amount: 0,
+            amount: '',
             expenses: [],
-            totalAmount: 0
+            totalAmount: 0.00
         };
     }
 
@@ -37,6 +37,16 @@ export default class Dashboard extends Component {
 
     _addExpense = () => {
         const { date, category, description, amount, expenses } = this.state;
+        if (date === "" || date === null) {
+            alert('Please enter a date.');
+            return;
+        } else if (description === "" || description === null) {
+            alert('Please enter a description.');
+            return;
+        } else if (amount === "" || amount === "") {
+            alert('Please enter an amount.');
+            return;
+        }
         var oldExpenses = expenses;
         const newExpense = {
             id: expenses.length + 1,
@@ -51,6 +61,10 @@ export default class Dashboard extends Component {
             expenses: JSON.parse(localStorage.getItem('expenses')),
             totalAmount: this._getTotalAmount()
         });
+        // reset state on input fields
+        this.setState({
+            date: '', category: '', description: '', amount: ''
+        });
     }
 
     _handleDateChange = (e) => {
@@ -63,7 +77,11 @@ export default class Dashboard extends Component {
         this.setState({description: e.target.value});
     }
     _handleAmountChange = (e) => {
-        this.setState({amount: parseFloat(e.target.value, 10)});
+        if (e.target.value !== '') {
+            this.setState({amount: parseFloat(e.target.value, 10)});
+        } else {
+            this.setState({amount: ''});
+        }
     }
 
     _getTotalAmount = () => {
@@ -75,14 +93,14 @@ export default class Dashboard extends Component {
     }
 
     render() {
-        const { expenses } = this.state;
+        const { date, category, description, amount, expenses } = this.state;
         return (
             <div>
                 <div style={{paddingTop:40,paddingBottom:40}}>
                     <TextField name="dateCreated" ref="dateCreated" type="date" required
-                                onChange={this._handleDateChange} />
+                                value={date} onChange={this._handleDateChange} />
                     <select name="category" style={{margin:20}}
-                            onChange={this._handleCategoryChange}>
+                            value={category} onChange={this._handleCategoryChange}>
                         <option value={0}>Utilities</option>
                         <option value={1}>Groceries</option>
                         <option value={2}>Household</option>
@@ -96,9 +114,9 @@ export default class Dashboard extends Component {
                         <option value={10}>Other</option>
                     </select>
                     <TextField name="description" ref="description" type="text" hintText="Description" required 
-                                onChange={this._handleDescriptionChange}/>
+                                value={description} onChange={this._handleDescriptionChange}/>
                     <TextField name="amount" type="number" hintText="0.00" min="0" max="99999" step="0.01" required 
-                                onChange={this._handleAmountChange}/>
+                                value={amount} onChange={this._handleAmountChange}/>
                     <RaisedButton 
                         style={{margin:12}} 
                         onClick={this._addExpense}
