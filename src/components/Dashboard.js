@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory from 'react-bootstrap-table2-filter';
 import { columns } from '../config/Columns';
+import { expenses } from '../config/TestExpenses';
 
 export default class Dashboard extends Component {
 
@@ -44,8 +45,9 @@ export default class Dashboard extends Component {
                         type="submit" />
                 </form>
                 <BootstrapTable 
-                    striped hover condensed
+                    striped hover
                     keyField='id' 
+                    data={expenses}
                     columns={columns} 
                     filter={filterFactory()} />
             </div>
