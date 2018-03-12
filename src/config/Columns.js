@@ -1,5 +1,8 @@
 import { textFilter, selectFilter } from 'react-bootstrap-table2-filter';
 
+/**
+ * Dropdown select options for adding a new expense.
+ */
 const categoryOptions = {
     0: 'Utilities',
     1: 'Groceries',
@@ -14,6 +17,9 @@ const categoryOptions = {
     10: 'Other',
 };
 
+/**
+ * Expense table column configuration.
+ */
 export const columns = [{
     dataField: 'date',
     text: 'Date',

@@ -19,22 +19,29 @@ export default class Dashboard extends Component {
         };
     }
 
+    /**
+     * If possible, loads up existing localStorage expenses onto component states to use for later.
+     */
     componentWillMount() {
         if (localStorage.getItem('expenses') != null) {
             this.setState({
                 expenses: JSON.parse(localStorage.getItem('expenses'))
             });
-        } else {
-            console.log('no expenses in local storage');
         }
     }
 
+    /**
+     * Sets up total amount after component has mounted.
+     */
     componentDidMount() {
         this.setState({
             totalAmount: this._getTotalAmount()
         });
     }
 
+    /**
+     * Adds a new expense to localStorage.
+     */
     _addExpense = () => {
         const { date, category, description, amount, expenses } = this.state;
         if (date === "" || date === null) {
@@ -67,6 +74,10 @@ export default class Dashboard extends Component {
         });
     }
 
+    /**
+     * Add expense event handlers.
+     * @param e
+     */
     _handleDateChange = (e) => {
         this.setState({date: e.target.value});
     }
@@ -84,6 +95,9 @@ export default class Dashboard extends Component {
         }
     }
 
+    /**
+     * Gets total amount of all expenses.
+     */
     _getTotalAmount = () => {
         var total = 0;
         for (let i = 0; i < this.state.expenses.length; i++) {

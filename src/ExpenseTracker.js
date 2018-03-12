@@ -12,7 +12,7 @@ class ExpenseTracker extends Component {
           <h1>
             Expense Tracker
           </h1>
-          <Dashboard />
+          <Dashboard /> {/* displays add expense form, along with expenses table */}
         </div>
       </MuiThemeProvider>
     );
