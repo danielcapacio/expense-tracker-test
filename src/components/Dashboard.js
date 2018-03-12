@@ -14,7 +14,8 @@ export default class Dashboard extends Component {
             category: '',
             description: '',
             amount: 0,
-            expenses: []
+            expenses: [],
+            totalAmount: 0
         };
     }
 
@@ -26,6 +27,12 @@ export default class Dashboard extends Component {
         } else {
             console.log('no expenses in local storage');
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            totalAmount: this._getTotalAmount()
+        });
     }
 
     _addExpense = () => {
@@ -41,7 +48,8 @@ export default class Dashboard extends Component {
         oldExpenses.push(newExpense);
         localStorage.setItem('expenses', JSON.stringify(oldExpenses));
         this.setState({
-            expenses: JSON.parse(localStorage.getItem('expenses'))
+            expenses: JSON.parse(localStorage.getItem('expenses')),
+            totalAmount: this._getTotalAmount()
         });
     }
 
@@ -56,6 +64,14 @@ export default class Dashboard extends Component {
     }
     _handleAmountChange = (e) => {
         this.setState({amount: e.target.value});
+    }
+
+    _getTotalAmount = () => {
+        var total = 0;
+        for (let i = 0; i < this.state.expenses.length; i++) {
+            total += this.state.expenses[i].amount;
+        }
+        return total;
     }
 
     render() {
@@ -96,6 +112,7 @@ export default class Dashboard extends Component {
                     data={expenses}
                     columns={columns} 
                     filter={filterFactory()} />
+                    Total Expenses:&nbsp;$<label>{this.state.totalAmount}</label>
             </div>
         );
     }
