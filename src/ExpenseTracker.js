@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ExpenseTracker.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dashboard from './components/Dashboard';
 
