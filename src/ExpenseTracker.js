@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ExpenseTracker.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Dashboard from './components/Dashboard';
 
 class ExpenseTracker extends Component {
   render() {
@@ -10,6 +11,7 @@ class ExpenseTracker extends Component {
           <h1>
             Expense Tracker
           </h1>
+          <Dashboard />
         </div>
       </MuiThemeProvider>
     );
